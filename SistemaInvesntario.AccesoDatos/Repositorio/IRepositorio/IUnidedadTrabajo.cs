@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace SistemaInvesntario.AccesoDatos.Repositorio.IRepositorio
 {
-    internal interface Interface1
+    public interface IUnidedadTrabajo : IDisposable
     {
+        IBodegaRepositorio Bodega { get; }
+
+        Task Guardar();
+
+
     }
 }

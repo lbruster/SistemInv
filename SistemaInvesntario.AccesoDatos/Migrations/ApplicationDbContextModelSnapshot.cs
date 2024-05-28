@@ -235,7 +235,7 @@ namespace SistemaInvesntario.AccesoDatos.Migrations
                     b.Property<string>("Descripcion")
                         .IsRequired()
                         .HasMaxLength(10)
-                        .HasColumnType("nvarchar(10)");
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<bool>("Estado")
                         .HasColumnType("bit");
