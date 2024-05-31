@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SistemaInventario.Modelos;
 using SistemaInvesntario.AccesoDatos.Repositorio.IRepositorio;
 
 namespace SistemaInventario.Areas.Admin.Controllers
@@ -18,6 +19,27 @@ namespace SistemaInventario.Areas.Admin.Controllers
         {
             return View();
         }
+
+        public async Task<IActionResult> Upsert(int? id)
+        {
+            Bodega bodega = new Bodega();
+
+            if (id == null)
+            {
+                //crear nueva bodega
+                bodega.Estado = true;
+                return View(bodega);
+            }
+            // Actualizamos Bodega
+            bodega = await _unidedadTrabajo.Bodega.Obtener(id.GetValueOrDefault());
+            if(bodega == null)
+            {
+                return NotFound();
+            }
+            return View(bodega);
+
+        }
+
 
         #region API
 
