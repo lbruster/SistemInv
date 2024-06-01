@@ -8,11 +8,11 @@ namespace SistemaInventario.Areas.Admin.Controllers
     public class BodegaController : Controller
     {
 
-        private readonly IUnidedadTrabajo _unidedadTrabajo;
+        private readonly IUnidadTrabajo _unidadTrabajo;
 
-        public BodegaController(IUnidedadTrabajo unidedadTrabajo)
+        public BodegaController(IUnidadTrabajo unidadTrabajo)
         {
-            _unidedadTrabajo = unidedadTrabajo;
+            _unidadTrabajo = unidadTrabajo;
         }
 
         public IActionResult Index()
@@ -31,13 +31,33 @@ namespace SistemaInventario.Areas.Admin.Controllers
                 return View(bodega);
             }
             // Actualizamos Bodega
-            bodega = await _unidedadTrabajo.Bodega.Obtener(id.GetValueOrDefault());
-            if(bodega == null)
+            bodega = await _unidadTrabajo.Bodega.Obtener(id.GetValueOrDefault());
+            if (bodega == null)
             {
                 return NotFound();
             }
             return View(bodega);
 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Upsert(Bodega bodega)
+        {
+            if (ModelState.IsValid)
+            {
+                if (bodega.Id == 0)
+                {
+                    await _unidadTrabajo.Bodega.Agregar(bodega);
+                }
+                else
+                {
+                    _unidadTrabajo.Bodega.Actualizar(bodega);
+                }
+                await _unidadTrabajo.Guardar();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(bodega);
         }
 
 
@@ -46,8 +66,20 @@ namespace SistemaInventario.Areas.Admin.Controllers
         [HttpGet]
         public async Task<IActionResult> ObtenerTodos()
         {
-            var todos = await _unidedadTrabajo.Bodega.ObtenerTodos();
+            var todos = await _unidadTrabajo.Bodega.ObtenerTodos();
             return Json(new { data = todos });
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id) 
+        {
+            var bodegaDb = await _unidadTrabajo.Bodega.ObtenerTodos(id);
+            if (bodegaDb == null)
+            {
+                return Json(new { success = false, message = "Error al borrar Bodega" });
+            }
+            _unidadTrabajo.Bodega.Remover(bodegaDb);
+            await _unidadTrabajo.Guardar();
+            return Json(new { success = true, message = "Bodega borrada exitosamente" });
         }
 
 

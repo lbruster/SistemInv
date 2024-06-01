@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SistemaInvesntario.AccesoDatos.Repositorio
 {
-    public class BodegaRepositorio : Repositorio<Bodega>, IBodegaRepositorio
+    public class BodegaRepositorio : Repositorio<Bodega>
     {
         private readonly ApplicationDbContext _db;
 
