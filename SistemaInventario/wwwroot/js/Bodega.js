@@ -55,8 +55,6 @@ function loadDataTable() {
         ]
     });
 }
-
-function Delete(url)
 {
     swal({
         title: "Estas Seguro de Eliminar esta Bodega?".
@@ -82,4 +80,4 @@ function Delete(url)
     });
         }
     });
-}
+}*/

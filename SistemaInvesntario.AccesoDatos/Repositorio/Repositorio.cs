@@ -40,7 +40,7 @@ namespace SistemaInvesntario.AccesoDatos.Repositorio
                 query = query.Where(filtro); // select /* from where ...
             }
             if (incluirPropiedades != null) {
-                foreach (var incluirProp in incluirPropiedades.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (var incluirProp in incluirPropiedades.Split(new char[] { ','}, StringSplitOptions.RemoveEmptyEntries))
                 {
                     query = query.Include(incluirProp); // ejemplo "Categoria, Marca" 
                 }

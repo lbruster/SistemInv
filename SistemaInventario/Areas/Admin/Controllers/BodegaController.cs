@@ -72,7 +72,7 @@ namespace SistemaInventario.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(int id) 
         {
-            var bodegaDb = await _unidadTrabajo.Bodega.ObtenerTodos(id);
+            var bodegaDb = await _unidadTrabajo.Bodega.Obtener(id);
             if (bodegaDb == null)
             {
                 return Json(new { success = false, message = "Error al borrar Bodega" });
