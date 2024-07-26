@@ -69,6 +69,7 @@ namespace SistemaInventario.Areas.Admin.Controllers
             var todos = await _unidadTrabajo.Bodega.ObtenerTodos();
             return Json(new { data = todos });
         }
+
         [HttpPost]
         public async Task<IActionResult> Delete(int id) 
         {

@@ -55,7 +55,7 @@ function loadDataTable() {
         ]
     });
 }
-{
+/*{
     swal({
         title: "Estas Seguro de Eliminar esta Bodega?".
             text: "Este registro no se podra recuperar",
