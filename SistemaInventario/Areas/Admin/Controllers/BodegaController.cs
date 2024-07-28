@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SistemaInventario.Modelos;
+using SistemaInventario.Utilidades;
 using SistemaInvesntario.AccesoDatos.Repositorio.IRepositorio;
+using System.ComponentModel;
 
 namespace SistemaInventario.Areas.Admin.Controllers
 {
@@ -49,14 +51,17 @@ namespace SistemaInventario.Areas.Admin.Controllers
                 if (bodega.Id == 0)
                 {
                     await _unidadTrabajo.Bodega.Agregar(bodega);
+                    TempData[DS.Exitosa] = "Bodega creada Exitosamente";
                 }
                 else
                 {
                     _unidadTrabajo.Bodega.Actualizar(bodega);
+                    TempData[DS.Exitosa] = "Bodega actualizada Exitosamente";
                 }
                 await _unidadTrabajo.Guardar();
                 return RedirectToAction(nameof(Index));
             }
+            TempData[DS.Error] = "Error al grabar Bodega";
             return View(bodega);
         }
 
@@ -83,7 +88,25 @@ namespace SistemaInventario.Areas.Admin.Controllers
             return Json(new { success = true, message = "Bodega borrada exitosamente" });
         }
 
-
+        [ActionName("ValidarNombre")]
+        public async Task<IActionResult> ValidarNombre(string nombre, int id =0)
+        {
+            bool valor = false;
+            var lista = await _unidadTrabajo.Bodega.ObtenerTodos();
+            if (id == 0)
+            {
+                valor = lista.Any(b => b.Nombre.ToLower().Trim() == nombre.ToLower().Trim());
+            }
+            else
+            {
+                valor = lista.Any(b => b.Nombre.ToLower().Trim() == nombre.ToLower().Trim() && b.Id !=id);
+            }
+            if(valor)
+            {
+                return Json(new { data = true });
+            }
+            return Json(new { data = false });
+        }
 
         #endregion
     }

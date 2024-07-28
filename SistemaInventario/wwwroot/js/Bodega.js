@@ -55,29 +55,33 @@ function loadDataTable() {
         ]
     });
 }
-/*{
-    swal({
-        title: "Estas Seguro de Eliminar esta Bodega?".
+
+function Delete(url) {
+    /*{*/
+        swal({
+            title: "Estas Seguro de Eliminar esta Bodega?",
             text: "Este registro no se podra recuperar",
-        icon: "warning",
-        buttons: true,
-        dangerMode: true
-    }).then((borrar) => {
-        if (borrar) {
-            $.ajax({
-                type: "POST",
-                url: url,
-                success: function!(data)
-                {
-                    if(data.success){
-                toastr.success(data.message);
-                datatable.ajax.reload();
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        }).then((borrar) => {
+            if (borrar) {
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    success: function(data)
+                    {
+                        if(data.success){
+                        toastr.success(data.message);
+                        datatable.ajax.reload();
+                        }
+                        else {
+                            toastr.error(data.message);
+                        }
+                    }
+                });
             }
-            else {
-                toastr.error(data.message);
-            }
-        }
-    });
-        }
-    });
-}*/
+        });
+   /* }*/
+
+}
