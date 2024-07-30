@@ -17,6 +17,10 @@
       "PackagePath": "staticwebassets\\js\\bodega.js"
     },
     {
+      "Id": "C:\\Users\\GTG\\Documents\\Dev Projects\\CSharp\\Guia\\SistemaInventario\\SistemaInventario\\wwwroot\\js\\categoria.js",
+      "PackagePath": "staticwebassets\\js\\categoria.js"
+    },
+    {
       "Id": "C:\\Users\\GTG\\Documents\\Dev Projects\\CSharp\\Guia\\SistemaInventario\\SistemaInventario\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
